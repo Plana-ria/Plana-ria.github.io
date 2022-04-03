@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>PHP on Planaria Work Log</title>
+    <link>https://plana-ria.github.io/tags/php/</link>
+    <description>Recent content in PHP on Planaria Work Log</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sat, 16 Oct 2021 16:22:35 +0900</lastBuildDate><atom:link href="https://plana-ria.github.io/tags/php/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>セーブ・ロード機能の実装</title>
+      <link>https://plana-ria.github.io/blog/unity2dgame/01/</link>
+      <pubDate>Sat, 16 Oct 2021 16:22:35 +0900</pubDate>
+      
+      <guid>https://plana-ria.github.io/blog/unity2dgame/01/</guid>
+      <description>経緯 わけあって，Unityでブラウザゲームを制作することになったのですが， 依頼主からセーブ・ロード機能が欲しいと言われました．
+とりあえず調べてみると，PlayerPrefsあたりが使えるみたいですが， ローカル保存ではなくサーバ保存にしたいとのこと．
+さらに調べてみると，ゲームアツマールに投稿すればAPIを使ってサーバに セーブできるらしいのですが，ニコニコアカウント必須なのはNGで， ゲーム自体も依頼主のホームページに置きたいそうなので却下．
+結局，SQLサーバに保存する機能を自作することにしました．
+概要 とはいえ，実装する構造自体はシンプルです．
+ Unityからセーブデータをサーバに送る処理 送られたセーブデータをデータベースに登録する処理 セーブデータをデータベースから読み込んでUnityに送る処理 Unityで受けっとたセーブデータをゲームに反映する処理  こんな感じでしょうか？
+とりあえず，サーバ側でセーブ・ロードするAPIを書いて， UnityでPostすれば良さそうです．
+セーブ・ロードAPI まずは，データベースとの接続処理を書きます．
+connect.php &amp;lt;?php //MySQL接続 function connectDB(){ //ユーザ名・DBアドレス $dsn = &#39;mysql:dbname=XXXXXXX; host=XXX.XXX.XXX.XXX; charset=utf8&#39;; $username = &#39;XXXX&#39;; $password = &#39;XXXX&#39;; try { $pdo = new PDO($dsn, $username, $password); } catch (PDOException $e) { exit(&#39;&#39; . $e-&amp;gt;getMessage()); } return $pdo; } ?&amp;gt;  次に，セーブ用の処理をPHPで書いていきます．
+save.php &amp;lt;?php require_once(&#39;connect.php&#39;); //connect.phpを使ってデータベースに接続する $pdo = connectDB(); $table = &amp;quot;XXX&amp;quot;; //DBのテーブル名 //POST受け取り $id = $_POST[&amp;quot;id&amp;quot;]; //ユーザのid $no = $_POST[&amp;quot;no&amp;quot;]; //セーブファイルの番号 $json = $_POST[&amp;quot;json&amp;quot;]; //json形式のセーブデータ if($no !</description>
+    </item>
+    
+  </channel>
+</rss>
